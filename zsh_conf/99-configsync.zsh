@@ -11,7 +11,9 @@
 #fi
 
 () {
+  (
   cd "$ENVCONF_ROOT"
   setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
-  git pull & disown
+  git pull --rebase 2>&1 >/dev/null & # disown
+  )
 }
