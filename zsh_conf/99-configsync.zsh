@@ -10,10 +10,43 @@
 #    echo "Sync $FAILED failed"
 #fi
 
-() {
+do_merge() {
   (
-  cd "$ENVCONF_ROOT"
-  setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
-  git pull --rebase 2>&1 >/dev/null & # disown
+    cd "$ENVCONF_ROOT"
+    orihead=$(git rev-parse -q --verify HEAD)
+    fetchhead=$(git rev-parse -q --verify FETCH_HEAD)
+    git fetch &
+    if [ "$orihead" = "$fetchhead" ]; then
+      return
+    fi
+    echo "EnvConf updated, trying to rebase..."
+    
+    oldsha=$(git rev-parse -q --verify refs/stash)
+    git stash push -q
+    newsha=$(git rev-parse -q --verify refs/stash)
+    if [ "$oldsha" = "$newsha" ]; then
+        made_stash_entry=false
+    else
+        made_stash_entry=true
+    fi
+    echo "   [*] rebasing..."
+    #pwd
+    git rebase $fetchhead
+    #sh
+    #return
+    if [ "$made_stash_entry" = "true" ]; then
+      if ! git stash pop -q >/dev/null 2>&1; then
+        echo "   [!] failed to merge! reverting to original version..."
+        git reset --hard $orihead >/dev/null 2>&1
+        git stash pop -q >/dev/null 2>&1
+      else
+        echo "   [I] successfully merged!"
+      fi
+    fi
   )
+}
+
+() {
+  setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
+  do_merge # >/dev/null 2>&1 # & disown
 }
