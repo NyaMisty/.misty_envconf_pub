@@ -15,7 +15,7 @@ do_merge() {
     cd "$ENVCONF_ROOT"
     orihead=$(git rev-parse -q --verify HEAD)
     fetchhead=$(git rev-parse -q --verify FETCH_HEAD)
-    git fetch &
+    git fetch >/dev/null 2>&1 &
     if [ "$orihead" = "$fetchhead" ]; then
       return
     fi
