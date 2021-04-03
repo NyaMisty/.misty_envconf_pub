@@ -25,7 +25,8 @@ compdef _precommand proxychains4
 
 alias gitssh=ssh
 
-export PROXY_STR=""
+export PROXY_STR="${PROXY_STR}"
+#export PROXY_STR=""
 proxy () {
   if [[ ! "$PROXY_STR" = "" ]]; then
     export ALL_PROXY="$PROXY_STR"
