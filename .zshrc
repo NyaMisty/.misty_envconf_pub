@@ -10,7 +10,8 @@ for file in $ENVCONF_ROOT/zsh_conf/*; do
     is_black=0
     #echo $file
     for blackentry in $ENVCONF_BLACKLIST; do
-        if [[ "$file" =~ "$blackentry" ]]; then
+        #if [[ "$file" =~ "$blackentry" ]]; then
+        if echo "$file" | grep -Eq "$blackentry"; then
             is_black=1
         fi
     done
