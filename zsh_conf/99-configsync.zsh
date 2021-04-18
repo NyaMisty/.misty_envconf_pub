@@ -15,7 +15,11 @@ do_merge() {
     cd "$ENVCONF_ROOT"
     orihead=$(git rev-parse -q --verify HEAD)
     fetchhead=$(git rev-parse -q --verify FETCH_HEAD)
-    git fetch < /dev/null >/dev/null 2>&1 &
+    if ! command -v setsid &> /dev/null; then
+      (true | git fetch < /dev/null >/dev/null 2>&1) &
+    else
+      true | (setsid git fetch) >/dev/null 2>&1 &
+    fi
     if [ -z "$fetchhead" ]; then
       echo "Failed to get fetch head, sync next time..."
       return
