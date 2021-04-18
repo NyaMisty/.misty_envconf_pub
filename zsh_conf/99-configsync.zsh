@@ -15,11 +15,15 @@ do_merge() {
     cd "$ENVCONF_ROOT"
     orihead=$(git rev-parse -q --verify HEAD)
     fetchhead=$(git rev-parse -q --verify FETCH_HEAD)
-    git fetch >/dev/null 2>&1 &
+    git fetch < /dev/null >/dev/null 2>&1 &
+    if [ -z "$fetchhead" ]; then
+      echo "Failed to get fetch head, sync next time..."
+      return
+    fi
     if [ "$orihead" = "$fetchhead" ]; then
       return
     fi
-    echo "EnvConf updated, trying to rebase..."
+    echo "EnvConf updated ($orihead->$fetchhead), trying to rebase..."
     
     oldsha=$(git rev-parse -q --verify refs/stash)
     git stash push -q
