@@ -5,6 +5,7 @@
 #
 #
 
+# pre-setup the git: git config --global core.sshcommand 'sh -c '"'"'eval "$GITSSHFUNC"; gitsshfun "$@"'"'"' _ '
 
 alias proxychains='proxychains4 '
 alias p='ALL_PROXY= all_proxy= proxychains4 '
