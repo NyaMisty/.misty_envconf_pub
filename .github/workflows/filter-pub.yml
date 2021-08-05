@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: git-filter-repo
+      uses: NyaMisty/git-filter-repo-docker-action@master
+      with:
+        privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+        targetOrg: NyaMisty
+        targetRepo: .misty_envconf_pub
+        targetBranch: master
+        filterArguments: >-
+          --path=_private/
+          --invert-paths
+          --force
+          --prune-empty always
+          --message-callback 'return re.sub(b"^changes: ", b"", message)'
