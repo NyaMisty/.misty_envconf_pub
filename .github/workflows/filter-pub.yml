@@ -3,8 +3,15 @@ on:
   push:
     branches: [ master ]
 
+  workflow_dispatch:
+    inputs:
+      manual:
+        required: true
+        default: true
+
 jobs:
   filter:
+    if: ${{ github.repository == 'NyaMisty/.misty_envconf' || github.event.inputs.manual }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
