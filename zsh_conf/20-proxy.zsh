@@ -12,7 +12,7 @@ alias p='ALL_PROXY= all_proxy= proxychains4 '
 alias pq='ALL_PROXY= all_proxy= proxychains4 -q'
 alias pin='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychains4_internal.conf '
 alias pdbg='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychain4_debug.conf '
-alias apt='pq apt '
+alias aptp='pq apt '
 alias sshp='pq ssh '
 compdef sshp=ssh
 
@@ -26,10 +26,11 @@ compdef _precommand proxychains4
 
 alias gitssh=ssh
 
-export PROXY_STR="${PROXY_STR}"
-#export PROXY_STR=""
+# specify $PROXY_STR in .zshrc.local to override proxy string
+# export PROXY_STR="${PROXY_STR}"
+
 proxy () {
-  if [[ ! "$PROXY_STR" = "" ]]; then
+  if [ ! -z ${PROXY_STR+x} ]; then
     export ALL_PROXY="$PROXY_STR"
   else
     orihost="parent-host"
@@ -39,11 +40,17 @@ proxy () {
     fi
     export ALL_PROXY="http://$host:7890"
   fi
+
+  if [ -z $ALL_PROXY ]; then
+    return
+  fi
+
   export all_proxy=$ALL_PROXY
   export HTTP_PROXY=$ALL_PROXY
   export HTTPS_PROXY=$ALL_PROXY
   export http_proxy=$ALL_PROXY
   export https_proxy=$ALL_PROXY
+  
   alias gitssh=sshp
   
   update_gitsshfun
