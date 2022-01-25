@@ -10,6 +10,9 @@ function docker_update_images {
     echo 'docker image prune'
     docker image prune
 }
+
+alias newenv='docker run --rm -v ${PWD}:/workdir -w /workdir -it nyamisty/dev'
+
 alias vimzshrc="vim /mnt/d/Envs/LinuxEnvs/.zshrc; exec $SHELL"
 alias vimrc="vim /mnt/d/Envs/LinuxEnvs/"
 
