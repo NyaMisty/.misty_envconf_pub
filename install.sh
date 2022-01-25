@@ -1,3 +1,17 @@
+if ! command -v realpath &> /dev/null; then
+    realpath() {
+      OURPWD=$PWD
+      cd "$(dirname "$1")"
+      LINK=$(readlink "$(basename "$1")")
+      while [ "$LINK" ]; do
+        cd "$(dirname "$LINK")"
+        LINK=$(readlink "$(basename "$1")")
+      done
+      REALPATH="$PWD/$(basename "$1")"
+      cd "$OURPWD"
+      echo "$REALPATH"
+    }
+fi
 basedir=$(dirname $(realpath $0))
 ln -s $basedir/.alacritty.yml ~/.alacritty.yml
 ln -s $basedir/.vimrc ~/.vimrc

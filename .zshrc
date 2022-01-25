@@ -1,3 +1,25 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+if ! command -v realpath &> /dev/null; then
+    realpath() {
+      OURPWD=$PWD
+      cd "$(dirname "$1")"
+      LINK=$(readlink "$(basename "$1")")
+      while [ "$LINK" ]; do
+        cd "$(dirname "$LINK")"
+        LINK=$(readlink "$(basename "$1")")
+      done
+      REALPATH="$PWD/$(basename "$1")"
+      cd "$OURPWD"
+      echo "$REALPATH"
+    }
+fi
+
 export ENVCONF_BLACKLIST=()
 export ENVCONF_ROOT=$(dirname $(realpath "${(%):-%x}"))
 
@@ -20,3 +42,4 @@ for file in $ENVCONF_ROOT/zsh_conf/*; do
         source "$file"
     fi
 done
+
