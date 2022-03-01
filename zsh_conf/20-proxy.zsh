@@ -34,9 +34,12 @@ proxy () {
     export ALL_PROXY="$PROXY_STR"
   else
     orihost="parent-host"
-    host=$(getent ahosts $orihost | head -n 1 | awk '{ print $1 }' | head -n 1)
+    host=""
+    if command -v getent &> /dev/null; then
+      host=$(getent ahosts $orihost | head -n 1 | awk '{ print $1 }' | head -n 1)
+    fi
     if [[ "$host" = "" ]]; then
-      host = $orihost
+      host=$orihost
     fi
     export ALL_PROXY="http://$host:7890"
   fi
