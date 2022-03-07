@@ -11,7 +11,7 @@ alias proxychains='proxychains4 '
 alias p='ALL_PROXY= all_proxy= proxychains4 '
 alias pq='ALL_PROXY= all_proxy= proxychains4 -q'
 alias pin='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychains4_internal.conf '
-alias pdbg='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychain4_debug.conf '
+alias pdbg='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychains4_debug.conf '
 alias aptp='pq apt '
 alias sshp='pq ssh '
 compdef sshp=ssh
