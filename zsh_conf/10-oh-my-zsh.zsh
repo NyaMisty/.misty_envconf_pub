@@ -3,7 +3,7 @@ export PATH=$HOME/.bin:/usr/local/bin:/usr/sbin:/sbin:$PATH
 
 # Path to your oh-my-zsh installation.
 if [[ "$ZSH" = "" ]]; then
-    export ZSH="/home/misty/.oh-my-zsh"
+    export ZSH="$HOME/.oh-my-zsh"
 fi
 
 # Set name of the theme to load --- if set to "random", it will
