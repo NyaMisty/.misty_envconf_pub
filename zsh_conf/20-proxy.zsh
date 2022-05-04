@@ -8,10 +8,22 @@
 # pre-setup the git: git config --global core.sshcommand 'sh -c '"'"'eval "$GITSSHFUNC"; gitsshfun "$@"'"'"' _ '
 
 alias proxychains='proxychains4 '
-alias p='ALL_PROXY= all_proxy= proxychains4 '
-alias pq='ALL_PROXY= all_proxy= proxychains4 -q'
+if command -v cproxy &> /dev/null; then
+  if [[ "$TPROXY_PORT" = "" ]]; then
+    export TPROXY_PORT=60080
+  fi
+  alias p='ALL_PROXY= all_proxy= cproxy --port '$TPROXY_PORT' --mode tproxy -- '
+  alias pq=p
+else
+  alias p='ALL_PROXY= all_proxy= proxychains4 '
+  alias pq='ALL_PROXY= all_proxy= proxychains4 -q'
+fi
+
+#alias p='ALL_PROXY= all_proxy= proxychains4 '
+#alias pq='ALL_PROXY= all_proxy= proxychains4 -q'
 alias pin='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychains4_internal.conf '
 alias pdbg='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychains4_debug.conf '
+
 alias aptp='pq apt '
 alias sshp='pq ssh '
 compdef sshp=ssh
