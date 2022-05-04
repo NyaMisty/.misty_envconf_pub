@@ -18,7 +18,7 @@ function dockertest {
     eval 'docker run --rm \
         -v ~/.newenv_zsh_history:/root/.zsh_history \
         -v ${PWD}:/workdir -w /workdir \
-        --tmpfs /tmp --tmpfs /run --tmpfs /run/lock -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+        --tmpfs /run --tmpfs /run/lock -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
         -e DISPLAY -v "${XAUTHORITY:-${HOME}/.Xauthority}:/root/.Xauthority:ro" -v "/tmp/.X11-unix:/tmp/.X11-unix:ro" \
         -it \
         "$@" \
