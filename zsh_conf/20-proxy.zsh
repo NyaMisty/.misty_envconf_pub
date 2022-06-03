@@ -24,9 +24,15 @@ fi
 alias pin='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychains4_internal.conf '
 alias pdbg='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychains4_debug.conf '
 
-alias aptp='pq apt '
-alias sshp='pq ssh '
+alias aptp='pq \apt '
+alias sshp='pq \ssh '
+alias npmp='pq \npm '
+alias moshp='pq \mosh'
+
 compdef sshp=ssh
+compdef npmp=npm
+compdef aptp=apt
+compdef moshp=mosh
 
 setopt complete_aliases
 compdef _precommand p
@@ -35,8 +41,6 @@ compdef _precommand pin
 compdef _precommand pdbg
 compdef _precommand proxychains
 compdef _precommand proxychains4
-
-alias gitssh=ssh
 
 # specify $PROXY_STR in .zshrc.local to override proxy string
 # export PROXY_STR="${PROXY_STR}"
@@ -65,6 +69,10 @@ proxy () {
   export HTTPS_PROXY=$ALL_PROXY
   export http_proxy=$ALL_PROXY
   export https_proxy=$ALL_PROXY
+
+  alias ssh=sshp
+  alias npm=npmp
+  alias mosh=moshp
   
   alias gitssh=sshp
   
