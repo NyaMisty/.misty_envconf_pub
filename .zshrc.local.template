@@ -1,0 +1,11 @@
+# Oh-My-Zsh Dir
+# export ZSH=/home/misty/.oh-my-zsh
+
+# ZSH Theme
+# export ZSH_THEME=ys
+
+# Proxy URL
+# export PROXY_STR=http://127.0.0.1:7890
+
+# Pyenv python3 version
+# export PYENV_PY3_VERSION=3.10.4
