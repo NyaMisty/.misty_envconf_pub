@@ -28,7 +28,7 @@ if [ -f ~/.zshrc.local ]; then
 fi
 #cp -RT /mnt/d/Envs/LinuxEnvs/zsh_conf/. ~/.zshconf >/dev/null 2>&1 || FAILED="$FAILED zshconf"
 
-for file in $ENVCONF_ROOT/zsh_conf/*; do
+for file in $ENVCONF_ROOT/zsh_conf/*.zsh; do
     is_black=0
     #echo $file
     for blackentry in $ENVCONF_BLACKLIST; do
