@@ -12,11 +12,18 @@ if command -v cproxy &> /dev/null; then
   if [[ "$TPROXY_PORT" = "" ]]; then
     export TPROXY_PORT=60080
   fi
-  alias p='ALL_PROXY= all_proxy= cproxy --port '$TPROXY_PORT' --mode tproxy -- '
+  function _proxyCommand {
+    ALL_PROXY= all_proxy= HTTP_PROXY= http_proxy= HTTPS_PROXY= https_proxy= cproxy --port $TPROXY_PORT --mode tproxy -- "$@"
+  }
+  #alias p='ALL_PROXY= all_proxy= HTTP_PROXY= http_proxy= HTTPS_PROXY= https_proxy= cproxy --port '$TPROXY_PORT' --mode tproxy -- '
+  alias p='_proxyCommand '
   alias pq=p
 else
-  alias p='ALL_PROXY= all_proxy= proxychains4 '
-  alias pq='ALL_PROXY= all_proxy= proxychains4 -q'
+  function _proxyCommand {
+    ALL_PROXY= all_proxy= HTTP_PROXY= http_proxy= HTTPS_PROXY= https_proxy= proxychains4 "$@"
+  }
+  alias p='_proxyCommand '
+  alias pq='_proxyCommand -q'
 fi
 
 #alias p='ALL_PROXY= all_proxy= proxychains4 '
@@ -70,6 +77,7 @@ proxy () {
   export http_proxy=$ALL_PROXY
   export https_proxy=$ALL_PROXY
 
+  #alias apt=aptp
   alias ssh=sshp
   alias npm=npmp
   alias mosh=moshp
