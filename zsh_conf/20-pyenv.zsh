@@ -17,7 +17,7 @@ export PYTHONNOUSERSITE="true"
 export PYENV_PY3_VERSION=${PYENV_PY3_VERSION:-3.10.4}
 
 function pipx() {
-    curprefix=$(pyenv prefix $PYENV_PY3_VERSION) PIPX_DEFAULT_PYTHON=$curprefix/bin/python PIPX_HOME=$curprefix/pipx PIPX_BIN_DIR=$curprefix/bin command pipx
+    curprefix=$(pyenv prefix $PYENV_PY3_VERSION) PIPX_DEFAULT_PYTHON=$curprefix/bin/python PIPX_HOME=$curprefix/pipx PIPX_BIN_DIR=$curprefix/bin command pipx "$@"
 }
 #alias pipx='curprefix=$(pyenv prefix $PYENV_PY3_VERSION) PIPX_DEFAULT_PYTHON=$curprefix/bin/python PIPX_HOME=$curprefix/pipx PIPX_BIN_DIR=$curprefix/bin \pipx'
 
