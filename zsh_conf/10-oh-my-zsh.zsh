@@ -70,7 +70,27 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting autojump)
+function check_plugin_exists() {
+    plug=$1
+    zsh_plug_dir=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins
+    [ -d $zsh_plug_dir/$plug ]
+}
+
+plugins=()
+if check_plugin_exists zsh-smartcache; then
+    plugins+=(zsh-smartcache)
+fi
+
+plugins+=(git)
+
+if check_plugin_exists fast-syntax-highlighting; then
+    plugins+=(fast-syntax-highlighting)
+else
+    plugins+=(zsh-syntax-highlighting)
+fi
+
+#echo $plugins
+#plugins=(git zsh-syntax-highlighting)
 
 # Allow root to use my zsh
 export ZSH_DISABLE_COMPFIX=true
