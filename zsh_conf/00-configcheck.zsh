@@ -13,4 +13,4 @@
     echo $envconf_changes
   fi
   )
-}
+} &!

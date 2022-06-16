@@ -56,5 +56,5 @@ do_merge() {
 
 () {
   setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
-  do_merge # >/dev/null 2>&1 # & disown
+  do_merge &! # >/dev/null 2>&1 # & disown
 }
