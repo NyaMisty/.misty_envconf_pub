@@ -4,9 +4,16 @@
 export PYENV_ROOT="${PYENV_ROOT:-/opt/pyenv}"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  #eval "$(pyenv init --path)"
+  if ! command -v smartcache >/dev/null; then
+      eval "$(pyenv init - --no-rehash)" # init - (init completion & path) is superset of init --path (path only)
+      eval "$(pyenv virtualenv-init -)"
+  else
+      smartcache eval pyenv init - --no-rehash
+      smartcache eval pyenv virtualenv-init -
+  fi
+      
+  pyenv rehash &!
 fi
 
 export PIPENV_VENV_IN_PROJECT=1
