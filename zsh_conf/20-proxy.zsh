@@ -8,6 +8,11 @@
 # pre-setup the git: git config --global core.sshcommand 'sh -c '"'"'eval "$GITSSHFUNC"; gitsshfun "$@"'"'"' _ '
 
 alias proxychains='proxychains4 '
+
+# When connect to ipv6 without ipv6, we still need proxychains...
+alias _p='ALL_PROXY= all_proxy= HTTP_PROXY= http_proxy= HTTPS_PROXY= https_proxy= proxychains4 '
+alias _pq='_p -q '
+
 if command -v cproxy &> /dev/null; then
   if [[ "$TPROXY_PORT" = "" ]]; then
     export TPROXY_PORT=60080
@@ -15,15 +20,19 @@ if command -v cproxy &> /dev/null; then
   function _proxyCommand {
     ALL_PROXY= all_proxy= HTTP_PROXY= http_proxy= HTTPS_PROXY= https_proxy= cproxy --port $TPROXY_PORT --mode tproxy -- "$@"
   }
-  #alias p='ALL_PROXY= all_proxy= HTTP_PROXY= http_proxy= HTTPS_PROXY= https_proxy= cproxy --port '$TPROXY_PORT' --mode tproxy -- '
-  alias p='_proxyCommand '
+  #alias p='_proxyCommand '
+  alias p='ALL_PROXY= all_proxy= HTTP_PROXY= http_proxy= HTTPS_PROXY= https_proxy= cproxy --port '$TPROXY_PORT' --mode tproxy -- '
   alias pq=p
 else
   function _proxyCommand {
     ALL_PROXY= all_proxy= HTTP_PROXY= http_proxy= HTTPS_PROXY= https_proxy= proxychains4 "$@"
   }
-  alias p='_proxyCommand '
-  alias pq='_proxyCommand -q'
+  #alias p='_proxyCommand '
+  #alias pq='_proxyCommand -q'
+  #alias p='ALL_PROXY= all_proxy= HTTP_PROXY= http_proxy= HTTPS_PROXY= https_proxy= proxychains4 '
+  #alias pq='p -q' 
+  alias p=_p
+  alias pq=_pq
 fi
 
 #alias p='ALL_PROXY= all_proxy= proxychains4 '
@@ -33,6 +42,8 @@ alias pdbg='ALL_PROXY= all_proxy= proxychains4 -f /etc/proxychains4_debug.conf '
 
 alias aptp='pq \apt '
 alias sshp='pq \ssh '
+# For IPV6
+alias sshp6='_pq \ssh'
 alias npmp='pq \npm '
 alias moshp='pq \mosh'
 
