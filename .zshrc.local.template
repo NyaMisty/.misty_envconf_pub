@@ -9,3 +9,6 @@
 
 # Pyenv python3 version
 # export PYENV_PY3_VERSION=3.10.4
+
+# Blacklist modules
+# export ENVCONF_BLACKLIST=(proxy pathfix)
