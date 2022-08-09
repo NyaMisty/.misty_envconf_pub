@@ -7,6 +7,8 @@
 # Proxy URL
 # export PROXY_STR=http://127.0.0.1:7890
 
+# Pyenv root dir
+# export PYENV_ROOT=/opt/pyenv
 # Pyenv python3 version
 # export PYENV_PY3_VERSION=3.10.4
 
