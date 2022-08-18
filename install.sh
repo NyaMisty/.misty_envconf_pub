@@ -23,6 +23,6 @@ if [ -d "$basedir/_private" ]; then
     ln -s $basedir/_private/.ssh/config ~/.ssh/config
 fi
 
-if [ ! -f ~/.zshrc.local.template ]; then
+if [ ! -f ~/.zshrc.local ]; then
   cp $basedir/.zshrc.local.template ~/.zshrc.local
 fi
