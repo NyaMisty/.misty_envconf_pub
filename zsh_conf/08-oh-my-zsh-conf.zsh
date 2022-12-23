@@ -1,11 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 #export PATH=$HOME/.bin:/usr/local/bin:/usr/sbin:/sbin:$PATH
 
-# Path to your oh-my-zsh installation.
-if [[ "$ZSH" = "" ]]; then
-    export ZSH="$HOME/.oh-my-zsh"
-fi
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -47,7 +42,7 @@ ZSH_THEME=${ZSH_THEME:-agnoster}
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -62,37 +57,21 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-function check_plugin_exists() {
-    plug=$1
-    zsh_plug_dir=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins
-    [ -d $zsh_plug_dir/$plug ]
-}
-
-plugins=()
-if check_plugin_exists zsh-smartcache; then
-    plugins+=(zsh-smartcache)
-fi
-
-plugins+=(git)
-
-if check_plugin_exists fast-syntax-highlighting; then
-    plugins+=(fast-syntax-highlighting)
-else
-    plugins+=(zsh-syntax-highlighting)
-fi
-
-#echo $plugins
-#plugins=(git zsh-syntax-highlighting)
-
 # Allow root to use my zsh
-export ZSH_DISABLE_COMPFIX=true
+ZSH_DISABLE_COMPFIX=true
 
-source $ZSH/oh-my-zsh.sh
+if false; then
+# zsh misc
+setopt auto_cd               # simply type dir name to cd
+setopt auto_pushd            # make cd behave like pushd
+setopt pushd_ignore_dups     # don't pushd duplicates
+setopt pushd_minus           # exchange the meanings of `+` and `-` in pushd
+setopt interactive_comments  # comments in interactive shells
+setopt multios               # multiple redirections
+setopt ksh_option_print      # make setopt output all options
+setopt extended_glob         # extended globbing
+setopt no_bare_glob_qual     # disable `PATTERN(QUALIFIERS)`, extended_glob has `PATTERN(#qQUALIFIERS)`
+setopt glob_dots             # match hidden files (affect completion)
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # remove '/'
+
+fi
