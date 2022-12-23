@@ -19,8 +19,14 @@ ln -s $basedir/.tmux.conf.local ~/.tmux.conf.local
 ln -s $basedir/.zshrc ~/.zshrc
 ln -s $basedir/.gdbinit ~/.gdbinit
 
+ln -s $basedir/.ssh/config.envconf.d ~/.ssh/config.envconf.d
+mkdir ~/.ssh/.s
 if [ -d "$basedir/_private" ]; then
     ln -s $basedir/_private/.ssh/config ~/.ssh/config
+else
+    if ! grep -q 'config\.envconf\.d' ~/.ssh/config; then
+        sed -i '1s|^|Include config.envconf.d/*.conf\n|' file
+    fi
 fi
 
 if [ ! -f ~/.zshrc.local ]; then
