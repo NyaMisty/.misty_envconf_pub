@@ -23,5 +23,5 @@ path=(${path:#/mnt*})
 #export PATH=$( printf '%s:' "${patharr[@]}" )
 
 export WSL_REQUIRED_PATH="/mnt/c/Program Files/Git/cmd"
-export PATH=$HOME/.bin:/usr/local/bin:/usr/sbin:/sbin:$WSL_REQUIRED_PATH:$PATH
+export PATH=$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:$WSL_REQUIRED_PATH:$PATH
 typeset -U path
