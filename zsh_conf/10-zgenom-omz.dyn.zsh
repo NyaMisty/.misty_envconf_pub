@@ -1,15 +1,7 @@
-export ZGENOM=${ZGENOM:-~/.zgenom}
-
-[[ -d $ZGENOM ]] || git clone https://github.com/jandamm/zgenom $ZGENOM
-
-source $ZGENOM/zgenom.zsh
-
-zgenom autoupdate  # every 7 days
-
 # Stub compdef for zgenom
-compdef() {}
+# compdef() {}
 
-if ! zgenom saved; then
+if [ -z $ZGENOM_SAVED ]; then
     # OMZ configs are performed in 10-oh-my-zsh-conf
     # OMZ Core
     zgenom ohmyzsh lib/termsupport.zsh
@@ -60,12 +52,9 @@ if ! zgenom saved; then
     zgenom load zdharma-continuum/fast-syntax-highlighting
     #zgenom load zsh-users/zsh-autosuggestions
     zgenom load zsh-users/zsh-history-substring-search
+
     zgenom load marlonrichert/zsh-edit  # TODO: remove it but keep the subword widget
     zgenom load QuarticCat/zsh-autopair
 
-    # Finalize
-    zgenom clean
-    zgenom save
-    zgenom compile $ZGENOM
 fi
 

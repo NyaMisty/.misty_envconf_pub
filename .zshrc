@@ -39,7 +39,18 @@ for file in $ENVCONF_ROOT/zsh_conf/*.zsh; do
     done
     if [ "$is_black" = "0" ]; then
         #echo "Loaded $file"
-        source "$file"
+        if command -v zgenom >/dev/null 2>&1 && [[ ! $file = *.dyn.zsh ]]; then
+            if [ -z $ZGENOM_SAVED ]; then
+                # echo "NotCached $file"
+                # echo zgenom load "$ENVCONF_ROOT" "root/${file#$ENVCONF_ROOT/}"
+                zgenom load "NyaMisty/zgenom_envconf" "root/${file#$ENVCONF_ROOT/}"
+            else
+                # echo "Cached $file"
+            fi
+        else
+            # echo "Dyn: $file"
+            source "$file"
+        fi
     fi
 done
 

@@ -106,7 +106,13 @@ unproxy () {
   unset all_proxy
   unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy
   alias gitssh=ssh
-  curl https://ip.gs &
+  # hash -r ssh
+  # hash -r npm
+  # hash -r mosh
+  unalias ssh
+  unalias npm
+  unalias mosh
+  curl https://cip.cc &
   update_gitsshfun
 }
 
