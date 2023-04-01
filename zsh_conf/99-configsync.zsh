@@ -10,6 +10,12 @@
 #    echo "Sync $FAILED failed"
 #fi
 
+if [[ "$USER" == "root" ]] && ! [[ "$HOME" == "/root" ]]; then
+    # we are in our "su"
+    echo "We are root, not syncing config!"
+    return 0
+fi
+
 TRAPUSR2 () {
     reset_prompt() {
         if command -v _p9k_reset_prompt >/dev/null; then
