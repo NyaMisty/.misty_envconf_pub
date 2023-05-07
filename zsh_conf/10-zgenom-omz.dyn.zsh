@@ -54,7 +54,7 @@ if [ -z $ZGENOM_SAVED ]; then
     zgenom load zsh-users/zsh-history-substring-search
 
     zgenom load marlonrichert/zsh-edit  # TODO: remove it but keep the subword widget
-    zgenom load QuarticCat/zsh-autopair
+    #zgenom load QuarticCat/zsh-autopair
 
 fi
 
