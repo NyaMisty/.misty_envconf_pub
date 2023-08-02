@@ -16,19 +16,20 @@ if [[ "$USER" == "root" ]] && ! [[ "$HOME" == "/root" ]]; then
     return 0
 fi
 
-TRAPUSR2 () {
-    reset_prompt() {
-        if command -v _p9k_reset_prompt >/dev/null; then
-            _p9k_reset_prompt
-        else
-            zle reset-prompt
-        fi
-    }
-    zle && reset_prompt
-}
+#TRAPUSR2 () {
+#    reset_prompt() {
+#        if command -v _p9k_reset_prompt >/dev/null; then
+#            _p9k_reset_prompt
+#        else
+#            zle reset-prompt
+#        fi
+#    }
+#    zle && reset_prompt
+#}
 force_new_prompt () {
     #kill -USR2 $(exec sh -c 'echo "$PPID"')
-    kill -USR2 $$
+    
+    #kill -USR2 $$
 }
 
 do_merge() {
