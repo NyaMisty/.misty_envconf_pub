@@ -26,17 +26,18 @@ prompt_preexec() {
 }
 
 prompt_precmd() {
+  exitcode=$?
   if (( prompt_prexec_realtime )); then
     local -rF elapsed_realtime=$(( EPOCHREALTIME - prompt_prexec_realtime ))
     unset prompt_prexec_realtime
 
-    if [[ $? -eq 130 ]]; then
+    if [[ $exitcode -eq 130 ]]; then
       return
     fi
     if (( elapsed_realtime < 40 )); then
       return
     fi
-    if [[ "$prompt_preexec_cmd" =~ ^(htop|top|btop|watch|vim).* ]]; then
+    if [[ "$prompt_preexec_cmd" =~ ^(htop|top|btop|watch|vim|tmux).* ]]; then
       return
     fi
     local -rF s=$(( elapsed_realtime%60 ))
