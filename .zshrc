@@ -16,7 +16,7 @@ if ! command -v realpath &> /dev/null; then
       done
       REALPATH="$PWD/$(basename "$1")"
       cd "$OURPWD"
-      #echo "$REALPATH"
+      echo "$REALPATH"
     }
 fi
 
