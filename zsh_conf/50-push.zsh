@@ -37,7 +37,10 @@ prompt_precmd() {
     if (( elapsed_realtime < 40 )); then
       return
     fi
-    if [[ "$prompt_preexec_cmd" =~ ^(htop|top|btop|watch|vim|tmux).* ]]; then
+    if [[ "$prompt_preexec_cmd" =~ ^(htop|top|btop|watch|vim|tmux|ping).* ]]; then
+      return
+    fi
+    if [[ "$prompt_preexec_cmd" =~ ^(python|python3)$ ]]; then
       return
     fi
     local -rF s=$(( elapsed_realtime%60 ))
