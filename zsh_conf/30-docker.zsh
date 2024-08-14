@@ -13,11 +13,14 @@ function last_docker {
     docker ps -q -l
 }
 
+export DOCKERTEST_WORKDIR=/workdir
+
 function dockertest {
     sudo touch ~/.newenv_zsh_history ~/.newenv_zsh_history.new
     eval 'docker run --rm \
         -v ~/.newenv_zsh_history:/root/.zsh_history \
-        -v ${PWD}:/workdir -w /workdir \
+        -v ~/.newenv_bash_history:/root/.bash_history \
+        -v ${PWD}:$DOCKERTEST_WORKDIR -w $DOCKERTEST_WORKDIR \
         --tmpfs /run --tmpfs /run/lock -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
         -e DISPLAY -v "${XAUTHORITY:-${HOME}/.Xauthority}:/root/.Xauthority:ro" -v "/tmp/.X11-unix:/tmp/.X11-unix:ro" \
         -it \
@@ -31,7 +34,7 @@ function run_simpledev {
     sudo touch ~/.newenv_zsh_history ~/.newenv_zsh_history.new
     eval 'docker run --rm \
         -v ~/.newenv_zsh_history:/root/.zsh_history \
-        -v ${PWD}:/workdir -w /workdir \
+        -v ${PWD}:$DOCKERTEST_WORKDIR -w $DOCKERTEST_WORKDIR \
         --tmpfs /tmp --tmpfs /run --tmpfs /run/lock -v /sys/fs/cgroup:/sys/fs/cgroup:ro' \
         $docker_param \
         '-it nyamisty/dev' \
