@@ -8,6 +8,7 @@ ZGENOM_ENVCONF="$ZGENOM/sources/NyaMisty/zgenom_envconf/___"
 
 # detects new file and changed file
 export ZGEN_RESET_ON_CHANGE=(${ENVCONF_ROOT}/zsh_conf/*)
+export ZGEN_COMPINIT_FLAGS="-u "
 
 source $ZGENOM/zgenom.zsh
 
