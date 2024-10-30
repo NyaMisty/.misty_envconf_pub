@@ -7,7 +7,8 @@ function pushex() {
   if [ -z "$MISTYPUSH_SERVER" ]; then
     return
   fi
-  curl "${MISTYPUSH_SERVER}/send" -d "text=$body" -d "desp=$desc" -d "chan=$channel"
+  # first send using default proxy, if failed, then force to use proxy
+  curl "${MISTYPUSH_SERVER}/send" -d "text=$body" -d "desp=$desc" -d "chan=$channel" || curl --proxy $PROXY_STR "${MISTYPUSH_SERVER}/send" -d "text=$body" -d "desp=$desc" -d "chan=$channel"
 }
 
 function push() {
