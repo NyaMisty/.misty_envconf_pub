@@ -34,6 +34,15 @@ if [ -z $ZGENOM_SAVED ]; then
         zgenom load romkatv/powerlevel10k powerlevel10k
     else
         zgenom ohmyzsh lib/git.zsh    # git prompt (replaced by p10k)
+
+        # load completions that provided by p10k
+        zgenom ohmyzsh --completion plugins/docker
+        zgenom ohmyzsh --completion plugins/git
+        zgenom ohmyzsh --completion plugins/ssh
+        zgenom ohmyzsh --completion plugins/mosh
+        zgenom ohmyzsh --completion plugins/tmux
+        zgenom ohmyzsh --completion plugins/screen
+
         zgenom ohmyzsh themes/$ZSH_THEME
     fi
 
